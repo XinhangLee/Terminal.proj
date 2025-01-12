@@ -227,13 +227,13 @@ char * Render_img (char *html, char *output[HEIGHT], int *row) {
     img.size.height = lens / img.size.width;
     Handle_img(&img, output, row);
     html += 7;
-    *row += 1;
     return html;
 }
 char * Render_div (char *html, char *output[HEIGHT], int *row) {
 
 }
 void Render(char *html, char *output[HEIGHT], int *row) {
+    html = Skip_blanks(html);
     while (*html != '\0') {
         if (strncmp(html, "<h", 2) == 0) {
             html = Render_h(html, output, row);
@@ -247,6 +247,7 @@ void Render(char *html, char *output[HEIGHT], int *row) {
         else if (strncmp(html, "<d", 2) == 0) {
             html = Render_div(html, output, row);
         }
+        html = Skip_blanks(html);
     }
 }
 

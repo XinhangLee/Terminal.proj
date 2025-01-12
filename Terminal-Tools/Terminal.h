@@ -15,7 +15,7 @@ enum COLOR{red,green,blue};
 enum DIRECTION{row,column};//方向。
 enum LAYOUT{start,center,end,space_evenly};//布局。
 extern char *ANSI[7];
-//红，蓝，绿，粗，斜，下，重置。
+//红，绿，蓝，粗，斜，下，重置。
 
 typedef struct size {
     int height;
@@ -24,7 +24,7 @@ typedef struct size {
 
 typedef union nature_content {
     int nature_content[4];
-    char src_content[200];
+    char src_content[505];
 } Nature_content;
 
 typedef struct nature {
@@ -48,17 +48,19 @@ typedef struct elem {
 //functions
 
 
-void Init(char *output[HEIGHT]);
+void Init(char *output[HEIGHT], char *out[HEIGHT]);
 void Init_elem(Element *elem);
 
 void Input(char html[]);
 
 char * Skip_blanks(char * str);
-char * Nature_check(char *html, Nature *nature);
 int Strlen(const char *str);
+int str_to_int(char *str, int len);
+char * Nature_check(char *html, Element *elem);
 void Toupper(char *str);
 char *ANSIcode(const Nature *nature);
-void HandleIt(const Element *elem, char *output[HEIGHT], const int *row, int len);
+void Handle_str(const Element *elem, char *output[HEIGHT], const int *row, int len);
+void Handle_img(const Element *elem, char *output[HEIGHT], int *row);
 char * Render_h (char *html, char *output[HEIGHT], int *row);
 char * Render_p (char *html, char *output[HEIGHT], int *row);
 char * Render_img (char *html, char *output[HEIGHT], int *row);

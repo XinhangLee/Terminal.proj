@@ -1,22 +1,22 @@
-#include <stdio.h>
-
 #include "Terminal-Tools/Terminal.h"
 
 int main() {
 
-    char output[10][51];
+    char *output[10];
     char html[10005];
+    int row = 0;
 
     Init(output);
     Input(html);
 
-    Tender(html,output);
+    Render(html,output,&row);
 
     Print(output);
-
+    // char str[17] = "\033[31mHello World!";
     // printf("\033[31m\033[36mHello World\n");
     // printf("Hello C!\033[0m\n");
-    // printf("end!");
+    // printf("end!\n");
+    // printf("%s",str);
 
 
     return 0;

@@ -59,7 +59,7 @@ int Strlen(const char *str);
 void Toupper(char *str);
 char *ANSIcode(const Nature *nature);
 void HandleIt(const Element *elem, char *output[HEIGHT], const int *row, int len);
-char * Render_h (char *html, char *output[HEIGHT], const int *row);
+char * Render_h (char *html, char *output[HEIGHT], int *row);
 char * Render_p (char *html, char *output[HEIGHT], int *row);
 char * Render_img (char *html, char *output[HEIGHT], int *row);
 char * Render_div (char *html, char *output[HEIGHT], int *row);

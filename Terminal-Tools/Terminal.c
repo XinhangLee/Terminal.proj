@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-// #include <stdlib.h>
 
 char *ANSI[7] =
     {"\033[31m","\033[34m","\033[32m","\033[1m","\033[3m","\033[4m","\033[0m"};
@@ -128,9 +127,8 @@ void HandleIt(const Element *elem, char *output[HEIGHT], const int *row, const i
         strcat(output[*row], output[i] + len);
         free(temp);
     }
-    *row++;
 }
-char * Render_h (char *html, char *output[HEIGHT], const int *row) {
+char * Render_h (char *html, char *output[HEIGHT], int *row) {
     Element h;
     Init_elem(&h);
     h.name = 0;
@@ -148,10 +146,28 @@ char * Render_h (char *html, char *output[HEIGHT], const int *row) {
     Toupper(h.content.str);
     HandleIt(&h,output,row,len);
     html += len + 4;
+    *row += 1;
     return html;
 }
 char * Render_p (char *html, char *output[HEIGHT], int *row) {
+    Element p;
+    Init_elem(&p);
+    p.name = 1;
+    html = html + 2;
+    html = Skip_blanks(html);
+    while (*html != '>') {
+        html = Nature_check(html,&p.nature);
+        html = Skip_blanks(html);
+    }//现在html -> '>'.
 
+    html +=1;//html -> 内容部分第一个字符。
+    int len = Strlen(html);
+    strncpy(p.content.str,html,len);
+    p.content.str[len] = '\0';
+    HandleIt(&p,output,row,len);
+    html += len + 4;
+    *row += 1;
+    return html;
 }
 char * Render_img (char *html, char *output[HEIGHT], int *row) {
 
@@ -175,8 +191,6 @@ void Render(char *html, char *output[HEIGHT], int *row) {
         }
     }
 }
-
-
 
 void Print(char *output[HEIGHT]) {
     for (int i = 0; i < HEIGHT; i++) {

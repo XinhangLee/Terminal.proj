@@ -1,0 +1,59 @@
+**用递归的方式渲染和输出：
+    经过输入的处理，现在html[]中的code应是这种形式：
+        <div em i u><h>Hello, world!</h><p>Nihao!</p></div>
+        即：没有'\n',可以包含' '的纯文本语言。
+    一层一层地剥，我将其分为父元素和子元素，在遍历html语言的过程中仅仅储存元素信息，遍历储存完一个父元素后直接输出，然后另起一行。
+    这里的父元素的判断以“栈”为标准，stack为空时（top==0)即输出。
+
+        # enum NAME{h,p,img,div};
+        //标注了元素名称的编号：
+        1 : h
+        2 : p
+        3 : img
+        4 : div
+
+void Render(char *html, int stack[], int *top){
+        if (html[i] == '<'){
+        //入栈:
+            非div子元素 (*top == 1) : 声明一个elem，并根据elem类型对其进行初始化
+            是div (*top == 1) : 声明elem,并声明一个int j = -1;用于记录子元素编号。
+            是div子元素 (*top != 1) : (elem) children[i],初始化
+        //记录name
+        }
+
+        while (html[i] != '>'）{
+            char nature[];
+            //记录所有属性到一个字符串里。
+            i++;
+        }
+
+        //记录属性，属性之间是以' '隔开的。
+        //void nature_record(char nature[], Element elem);
+        //此时html[i] == '>'
+        i++;
+
+        while (html[i] != '<'){
+            //记录内容。
+        }
+
+        check:
+        if (html[i + 1] == '/'){
+            top--;
+            //移动指针
+            goto check;
+        }
+
+        if (*top == 0){
+            //Print(Element elem);
+            //移动指针
+        }
+        else {
+            j++;
+        }
+
+    if (html[i] != '\0'){
+        Render(html + i, stack, &top);
+    }
+}
+
+再写一个子元素的Render,他要包含elem的声明。

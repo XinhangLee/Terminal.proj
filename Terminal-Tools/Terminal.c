@@ -184,6 +184,8 @@ char * Render_h (char *html, char *output[HEIGHT], int *row) {
 
     html +=1;//html -> 内容部分第一个字符。
     int len = Strlen(html);
+    h.size.width = len;
+    h.size.height = 1;
     strncpy(h.content.str,html,len);
     h.content.str[len] = '\0';
     Toupper(h.content.str);
@@ -205,6 +207,8 @@ char * Render_p (char *html, char *output[HEIGHT], int *row) {
 
     html +=1;//html -> 内容部分第一个字符。
     int len = Strlen(html);
+    p.size.width = len;
+    p.size.height = 1;
     strncpy(p.content.str,html,len);
     p.content.str[len] = '\0';
     Handle_str(&p,output,row,len);

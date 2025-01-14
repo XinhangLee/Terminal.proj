@@ -70,7 +70,7 @@ int Strlen(const char *str) {
     }
     return count;
 }
-int str_to_int(char *str, int len) {
+int str_to_int(char *str, const int len) {
     *(str + len) = '\0';
     return atoi(str);
 }
@@ -187,7 +187,7 @@ char * Nature_check(char *html, Element *elem) {
     }
     return html;
 }
-void Toupper(char *html) {
+void Toupper(const char *html) {
     char *str = html;
     while (*str) {
         if (*str >= 'a' && *str <= 'z') {
@@ -197,7 +197,7 @@ void Toupper(char *html) {
     }
 }
 char * ANSIcode(const Nature *nature) {
-    char *result = calloc(20, sizeof(*result));
+    char *result = malloc(20 * sizeof(*result));
     if (result == NULL) {
         return NULL;
     }
@@ -216,14 +216,14 @@ char * ANSIcode(const Nature *nature) {
     }
     return result;
 }
-int Blank_width(Element *elem) {
+int Blank_width(const Element *elem) {
     int width = 0;
     for (int j = 0; j < elem->content.child.children_number; j++) {
         width += elem->content.child.children[j]->size.width[1];
     }
     return elem->size.width[1] - width;
 }
-int Blank_height(Element *elem) {
+int Blank_height(const Element *elem) {
     int height = 0;
     for (int i = 0; i < elem->content.child.children_number; i++) {
         height += elem->content.child.children[i]->size.height[1];
@@ -1244,14 +1244,14 @@ char * Render_img (char *html, char *output[], int *row) {
     html += 7;
     return html;
 }
-void Inherit(Element *father, Element *child) {
+void Inherit(const Element *father, Element *child) {
     child->nature.have_or_not[color] = father->nature.have_or_not[color];
     child->nature.have_or_not[em] = father->nature.have_or_not[em];
     child->nature.have_or_not[i] = father->nature.have_or_not[i];
     child->nature.have_or_not[u] = father->nature.have_or_not[u];
     child->nature.nature_content.nature_content[color] = father->nature.nature_content.nature_content[color];
 }
-void Update(Element *father, Element *child) {
+void Update(Element *father, const Element *child) {
     if (father->nature.nature_content.nature_content[direction] == column) {
         if (child->size.height[1] > father->size.height[1]) {
             father->size.height[1] = child->size.height[1];

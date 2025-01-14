@@ -5,8 +5,8 @@
 #ifndef TERMINAL_H
 #define TERMINAL_H
 
-#define WIDTH 50
-#define HEIGHT 10
+extern int WIDTH;
+extern int HEIGHT;
 //structures
 
 enum NAME{h,p,img,dive};
@@ -69,18 +69,18 @@ char * Skip_blanks(char * str);
 int Strlen(const char *str);
 int str_to_int(char *str, int len);
 char * Nature_check(char *html, Element *elem);
-void Toupper(char *str);
+void Toupper(const char *str);
 char *ANSIcode(const Nature *nature);
-int Blank_width(Element *elem);
-int Blank_height(Element *elem);
+int Blank_width(const Element *elem);
+int Blank_height(const Element *elem);
 void Handle_str(const Element *elem, char *output[], const int *row, int len);
 void Handle_img(const Element *elem, char *output[], int *row);
 void Handle_div(Element *elem, char *output[], int *row);
 char * Render_h (char *html, char *output[], int *row);
 char * Render_p (char *html, char *output[], int *row);
 char * Render_img (char *html, char *output[], int *row);
-void Inherit(Element *father, Element *child);
-void Update(Element *father, Element *child);
+void Inherit(const Element *father, Element *child);
+void Update(Element *father, const Element *child);
 char * Memory_child(Element *elem, char html[]);
 char * Render_div (char *html, char *output[], int *row);
 void Render(char *html, char *output[], int *row);

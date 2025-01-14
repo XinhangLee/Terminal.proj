@@ -1,0 +1,6 @@
+50 5
+<div w="50" h="5" justify-content="center" align-items="center">
+    <p em color="green">You Can Choose</p>
+    <p>1.Continue</p>
+    <p>2.Exit</p>
+</div>

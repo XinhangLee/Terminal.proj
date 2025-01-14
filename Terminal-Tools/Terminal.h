@@ -87,4 +87,8 @@ void Render(char *html, char *output[], int *row);
 
 void Print(char *output[]);
 
+void Executive();
+void Entrance();
+void Mode();
+void Continue();
 #endif //TERMINAL_H

@@ -1,0 +1,11 @@
+50 9
+<div w="50" h="5" justify-content="center" align-items="center">
+<h em color="red">welcome!</h>
+<p>This is a project simulating</p>
+<p em u color="blue">Browser In Terminal</p>
+</div>
+<div w="50" h="3" justify-content="center">
+    <p em color="green">You Can Choose</p>
+    <p>1.Entrance</p>
+    <p>2.Exit</p>
+</div>

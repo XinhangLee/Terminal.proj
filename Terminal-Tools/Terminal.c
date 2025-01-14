@@ -1411,3 +1411,37 @@ void Print(char *output[]) {
         free(output[i]);
     }
 }
+void Executive() {
+    char *output[HEIGHT], *out[HEIGHT];
+    char html[10005];
+    int row = 0;
+
+    Init(output,out);
+    Input(html);
+
+    Render(html,output,&row);
+
+    Print(out);
+    fflush(stdout);
+}
+void Entrance() {
+    freopen("D:\\cpl\\filework\\browserinterminal\\Execution\\Entrance", "r",stdin);
+    scanf("%d",&WIDTH);
+    scanf("%d",&HEIGHT);
+    Executive();
+    freopen("CON", "r", stdin);
+}
+void Mode() {
+    freopen("D:\\cpl\\filework\\browserinterminal\\Execution\\Mode", "r",stdin);
+    scanf("%d",&WIDTH);
+    scanf("%d",&HEIGHT);
+    Executive();
+    freopen("CON", "r", stdin);
+}
+void Continue() {
+    freopen("D:\\cpl\\filework\\browserinterminal\\Execution\\Continue", "r",stdin);
+    scanf("%d",&WIDTH);
+    scanf("%d",&HEIGHT);
+    Executive();
+    freopen("CON", "r", stdin);
+}

@@ -10,6 +10,7 @@
 
 ### 项目结构
 
+```markdown
 browserinterminal/
 │
 ├── .vscode/
@@ -35,6 +36,7 @@ browserinterminal/
 ├── FakeCode
 ├── README.md
 └── test.c
+```
 
 
 $$下面是原作业题目的描述$$

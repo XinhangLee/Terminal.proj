@@ -1,0 +1,14 @@
+[
+{
+  "directory": "D:/cpl/filework/browserinterminal/build",
+  "command": "D:\\cpl\\mingw64\\bin\\gcc.exe  @CMakeFiles/browserinterminal.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\browserinterminal.dir\\Terminal-Tools\\Terminal.c.obj -c D:\\cpl\\filework\\browserinterminal\\Terminal-Tools\\Terminal.c",
+  "file": "D:/cpl/filework/browserinterminal/Terminal-Tools/Terminal.c",
+  "output": "CMakeFiles/browserinterminal.dir/Terminal-Tools/Terminal.c.obj"
+},
+{
+  "directory": "D:/cpl/filework/browserinterminal/build",
+  "command": "D:\\cpl\\mingw64\\bin\\gcc.exe  @CMakeFiles/browserinterminal.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\browserinterminal.dir\\test.c.obj -c D:\\cpl\\filework\\browserinterminal\\test.c",
+  "file": "D:/cpl/filework/browserinterminal/test.c",
+  "output": "CMakeFiles/browserinterminal.dir/test.c.obj"
+}
+]

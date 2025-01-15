@@ -1,0 +1,3 @@
+D:\cpl\Cmake\bin\cmake.exe -E rm -f CMakeFiles\browserinterminal.dir/objects.a
+D:\cpl\mingw64\bin\ar.exe qc CMakeFiles\browserinterminal.dir/objects.a @CMakeFiles\browserinterminal.dir\objects1.rsp
+D:\cpl\mingw64\bin\gcc.exe -g -Wl,--whole-archive CMakeFiles\browserinterminal.dir/objects.a -Wl,--no-whole-archive -o browserinterminal.exe -Wl,--out-implib,libbrowserinterminal.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\browserinterminal.dir\linkLibs.rsp

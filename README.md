@@ -8,6 +8,35 @@
 
 >利用项目本身进行了提示行的渲染，用户可根据提示进行两种方式的源代码输入，且可以随时退出。
 
+### 项目结构
+
+browserinterminal/
+│
+├── .vscode/
+│   └── tasks.json
+│
+├── build/
+│
+├── cases/
+│
+├── cmake-build-debug/
+│
+├── Execution/
+│
+├── images/
+│
+├── Terminal-Tools/
+│   ├── Terminal.c
+│   └── Terminal.h
+│
+├── .gitignore
+├── CMakeLists.txt
+├── comparison
+├── FakeCode
+├── README.md
+└── test.c
+
+
 $$下面是原作业题目的描述$$
 
 ## 题目描述

@@ -76,7 +76,7 @@ struct nature
 struct children
 {
     int children_number;
-    Element *children[10]; // this is an array which contains several points.
+    Element *children[20]; // this is an array which contains several points.
 };
 
 union content
@@ -111,7 +111,7 @@ int Blank_height(const Element *elem);
 void Row_J_Start(const Element *elem, char *output[], int *rows);
 void Row_J_CenterAndEvenly(const Element *elem, char *output[], int *rows);
 void Row_J_End(const Element *elem, char *output[], int *rows);
-void Row_J(Element *elem, char *output[], int *rows);
+void Row_J(const Element *elem, char *output[], int *rows);
 void Col_AI_Start(const Element *elem, char *output[], const int *rows);
 void Col_AI_CenterAndEvenly(const Element *elem, char *output[], const int *rows);
 void Col_AI_End(const Element *elem, char *output[], const int *rows);
@@ -123,6 +123,7 @@ char * Render_p (char *html, char *output[], int *row);
 char * Render_img (char *html, char *output[], int *row);
 void Inherit(const Element *father, Element *child);
 void Update(Element *father, const Element *child);
+void Free_Children(const Element *father);
 char * Memory_child(Element *elem, char html[]);
 char * Render_div (char *html, char *output[], int *row);
 void Render(char *html, char *output[], int *row);

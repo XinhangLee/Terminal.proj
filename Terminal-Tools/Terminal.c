@@ -13,9 +13,9 @@ char *ANSI[7] =
 
 void Init(char *output[], char *out[]) {
     for (int i = 0; i < HEIGHT; i++) {
-        output[i] = (char *)malloc(100 * sizeof(*output[i]));
+        output[i] = (char *)malloc((WIDTH + 100) * sizeof(*output[i]));//防止有大量的转义符撑爆output。
         memset(output[i], ' ', WIDTH);
-        output[i][WIDTH] = '\0';
+        memset(output[i] + WIDTH, '\0', 100);
         out[i] = output[i];
     }
 }
@@ -252,7 +252,6 @@ void Row_J_Start(const Element *elem, char *output[], int *rows) {
                 *rows += 1;
             }
         }
-        free(elem->content.child.children[count]);
         count += 1;
         if (elem->nature.nature_content.nature_content[align_items] == space_evenly) {
             if (count != elem->content.child.children_number) {
@@ -298,7 +297,6 @@ void Row_J_CenterAndEvenly(const Element *elem, char *output[], int *rows) {
                 *rows += 1;
             }
         }
-        free(elem->content.child.children[count]);
         count += 1;
         if (elem->nature.nature_content.nature_content[align_items] == space_evenly) {
             if (count != elem->content.child.children_number) {
@@ -337,7 +335,6 @@ void Row_J_End(const Element *elem, char *output[], int *rows) {
             }
             Handle_div(elem->content.child.children[count], output, &r);
         }
-        free(elem->content.child.children[count]);
         count += 1;
         if (elem->nature.nature_content.nature_content[align_items] == space_evenly) {
             if (count != elem->content.child.children_number) {
@@ -352,7 +349,7 @@ void Row_J_End(const Element *elem, char *output[], int *rows) {
         }
     }
 }
-void Row_J(Element *elem, char *output[], int *rows) {
+void Row_J(const Element *elem, char *output[], int *rows) {
     if (elem->nature.nature_content.nature_content[justify_content] == start) {
         Row_J_Start(elem, output, rows);
     }
@@ -382,7 +379,6 @@ void Col_AI_Start(const Element *elem, char *output[], const int *rows) {
             output[r] += elem->content.child.children[count]->size.width[1];
             r += 1;
         }
-        free(elem->content.child.children[count]);
         count += 1;
         if (elem->nature.nature_content.nature_content[justify_content] == space_evenly)
             if (count != elem->content.child.children_number) {
@@ -417,7 +413,6 @@ void Col_AI_CenterAndEvenly(const Element *elem, char *output[], const int *rows
         while (temp4--) {
             output[r++] += elem->content.child.children[count]->size.width[1];
         }
-        free(elem->content.child.children[count]);
         count += 1;
         if (elem->nature.nature_content.nature_content[justify_content] == space_evenly) {
             if (count != elem->content.child.children_number) {
@@ -449,7 +444,6 @@ void Col_AI_End(const Element *elem, char *output[], const int *rows) {
         else if (elem->content.child.children[count]->name == dive) {
             Handle_div(elem->content.child.children[count], output, &r);
         }
-        free(elem->content.child.children[count]);
         count += 1;
         if (elem->nature.nature_content.nature_content[justify_content] == space_evenly) {
             if (count != elem->content.child.children_number) {
@@ -467,8 +461,8 @@ void Col_AI_End(const Element *elem, char *output[], const int *rows) {
 void Handle_str(const Element *elem, char *output[],int *row, const int len) {
     char *temp = ANSIcode(&elem->nature);
     if (temp) {
-        char *str = malloc(100 * sizeof(*str));
-        memset(str, '\0', 100);
+        char *str = malloc((WIDTH + 50) * sizeof(*str));
+        memset(str, '\0', WIDTH + 50);
         if (temp[0]) {
             strcat(str, temp);
             strcat(str, elem->content.str);
@@ -489,8 +483,8 @@ void Handle_img(const Element *elem, char *output[], int *row) {
     int count = elem->size.height[1];
     char *temp = elem->nature.nature_content.src_content;
     while (count--) {
-        char *str = malloc(55 * sizeof(*str));
-        memset(str, '\0', 55);
+        char *str = malloc(200 * sizeof(*str));
+        memset(str, '\0', 200);
         strncpy(str, temp, elem->size.width[1]);
         strcat(str, output[*row] + elem->size.width[1]);
         strcpy(output[*row], str);
@@ -804,6 +798,14 @@ void Update(Element *father, const Element *child) {
         }
     }
 }
+void Free_Children(const Element *father) {
+    for (int i = 0; i < father->content.child.children_number; i++) {
+        if (father->content.child.children[i]->name == dive) {
+            Free_Children(father->content.child.children[i]);
+        }
+        free(father->content.child.children[i]);
+    }
+}
 char * Memory_child(Element *elem, char html[]) {
     if (elem->name == h || elem->name == p) {
         while (*html != '>') {
@@ -917,6 +919,7 @@ char * Render_div (char *html, char *output[], int *row) {
         html = Skip_blanks(html);
     }
     Handle_div(&div, output, row);
+    Free_Children(&div);
     return html;
 }
 void Render(char *html, char *output[], int *row) {

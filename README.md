@@ -251,6 +251,59 @@ Man, what can I say
 
 ![image-20241214153501041](images/image-20241214153501041.png)
 
+##### 样式(style)
+
+style 标签能定义某类元素的属性，或者提供自定义属性
+
+- 元素名: `style`
+
+- 属性: 无
+
+- 格式
+
+```html
+<style>
+    元素名{ 属性列表 }
+    .自定义属性名{ 属性列表 }
+</style>
+```
+
+其中，`属性列表`为一个或者多个`属性项`组成的字符串。对于无值属性，属性项为 `属性名;` ；对于有值属性，属性项为 `属性名:属性值;` 。具体可以看下面的例子。
+
+使用说明:
+
+- 定义某类元素的属性。
+
+    - 下例中，style 会使得代码中所有 p 元素拥有 color 和 em 属性，所有 h 元素拥有 u 属性。即使元素没有显式包含上述属性。
+
+```html
+<style>
+    p { color:red;em; }
+    h { u; }
+</style>
+<h>This header will be underlined</h>
+```
+
+- 自定义属性。
+
+    - 将已知的属性包装成一个新的**无值属性**。
+
+```html
+<style>
+    .my-style { color:red;em; }
+</style>
+<p my-style>This paragraph will be emphasized and in red</p>
+```
+
+**规定**：
+
+- style 中的空白符，严格遵循格式以及例子中的样式
+- style 元素如果出现，一定是代码中的第一个元素，并且其作用域为整个代码文本中的所有元素
+- 只会定义 p 和 h 元素的属性。也就是说，样式中的 `元素名` 只可能为 `p` 或者 `h`
+- 自定义属性由前导 `.` 标识，并且自定义属性名只会出现字母和 `-` (英文减号)
+- 自定义属性中，只会出现对 `p`, `h`, `div` 有作用的属性
+  - 具体来说，是这些：`em` `i` `u` `color` `w` `h` `direction` `align-items` `justify-content`
+
 #### 属性
 
 属性的继承遵循以下规则：

@@ -1,3 +1,0 @@
-D:/cpl/filework/browserinterminal/build/CMakeFiles/browserinterminal.dir
-D:/cpl/filework/browserinterminal/build/CMakeFiles/edit_cache.dir
-D:/cpl/filework/browserinterminal/build/CMakeFiles/rebuild_cache.dir

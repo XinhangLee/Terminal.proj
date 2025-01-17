@@ -9,7 +9,7 @@
 >利用项目本身进行了提示行的渲染，用户可根据提示进行两种方式的源代码输入，且可以随时退出。
 
 >现在项目的输出是完全正确的，以 `Cloud.in` 为例，你一定要规定足够大的 `Windows` 窗口才能确保正确输出。
-    项目中自带的输入文件除下面 `项目结构` 中标记外均是 `50 * 10` 大小。
+项目中自带的输入文件除下面 `项目结构` 中标记外均是 `50 * 10` 大小。
 
 ### 项目结构
 
@@ -43,7 +43,6 @@ browserinterminal/
 ├── README.md
 └── test.c
 ```
-
 
 $$下面是原作业题目的描述$$
 
@@ -251,58 +250,61 @@ Man, what can I say
 
 ![image-20241214153501041](images/image-20241214153501041.png)
 
-##### 样式(style)
+##### 样式(style)*
 
-style 标签能定义某类元素的属性，或者提供自定义属性
+> 软院班(class0)需要考虑这个元素
 
-- 元素名: `style`
+style 标签能向某类元素指派（Assign）属性，或者提供自定义属性。
 
-- 属性: 无
-
+- 元素名：`style`
+- 属性：无
 - 格式
 
-```html
-<style>
-    元素名{ 属性列表 }
-    .自定义属性名{ 属性列表 }
-</style>
-```
+    ```html
+    <style>
+        元素名 { 属性列表 }
+        .自定义属性名 { 属性列表 }
+    </style>
+    ```
 
-其中，`属性列表`为一个或者多个`属性项`组成的字符串。对于无值属性，属性项为 `属性名;` ；对于有值属性，属性项为 `属性名:属性值;` 。具体可以看下面的例子。
+​	其中，*属性列表*为一个或者多个*属性项*组成的字符串。对于无值属性，属性项为 `属性名;`；对于有值属性，属性项为 `属性名:属性值;`。具体可以看下面的例子。
 
-使用说明:
+使用说明：
 
-- 定义某类元素的属性。
+- **向某类元素指派属性**。
 
-    - 下例中，style 会使得代码中所有 p 元素拥有 color 和 em 属性，所有 h 元素拥有 u 属性。即使元素没有显式包含上述属性。
+    - 下例中，style 会使得代码中**所有** p 元素拥有 color 和 em 属性，所有 h 元素拥有 u 属性。即使元素没有显式包含上述属性。但是，当元素显式指定属性时，以显式指定的为准。
 
-```html
-<style>
-    p { color:red;em; }
-    h { u; }
-</style>
-<h>This header will be underlined</h>
-```
+    ```html
+    <style>
+        p { color:red;em; }
+        h { u; }
+    </style>
+    <h>This header will be underlined</h>
+    <p color="blue">This paragraph will be blue and emphasized</p>
+    ```
 
-- 自定义属性。
+- **自定义属性**。将已知的属性包装成一个新的**无值属性**。
 
-    - 将已知的属性包装成一个新的**无值属性**。
+    ```html
+    <style>
+        .my-style { color:red;em; }
+    </style>
+    <p my-style>This paragraph will be red and emphasized</p>
+    ```
+    
 
-```html
-<style>
-    .my-style { color:red;em; }
-</style>
-<p my-style>This paragraph will be emphasized and in red</p>
-```
+规定：
 
-**规定**：
-
-- style 中的空白符，严格遵循格式以及例子中的样式
-- style 元素如果出现，一定是代码中的第一个元素，并且其作用域为整个代码文本中的所有元素
+- style 中的空白符，严格遵循格式以及例子中的样式。即每一行开头有 4 个空格，`{` 前后各一个空格，`}` 前一个空格 
+- style 元素如果出现，一定是代码中的**第一个元素**，并且其作用域为整个代码文本中的**所有元素**
 - 只会定义 p 和 h 元素的属性。也就是说，样式中的 `元素名` 只可能为 `p` 或者 `h`
 - 自定义属性由前导 `.` 标识，并且自定义属性名只会出现字母和 `-` (英文减号)
-- 自定义属性中，只会出现对 `p`, `h`, `div` 有作用的属性
-  - 具体来说，是这些：`em` `i` `u` `color` `w` `h` `direction` `align-items` `justify-content`
+- 自定义属性不超过 10 个，名称长度不超过 50 个字符
+- 自定义属性中，只会出现对 p, h, div 有作用的属性
+    - 具体来说，是这些：`em` `i` `u` `color` `w` `h` `direction` `align-items` `justify-content`
+- 为了简化，自定义属性**不可继承**，即使自定义属性里包含了可继承的属性
+- 标签中不会重复出现自定义属性中包含的属性
 
 #### 属性
 
@@ -313,14 +315,14 @@ style 标签能定义某类元素的属性，或者提供自定义属性
 2. 从*父元素*继承的属性与*子元素*自己所拥有的属性发生*冲突*时，以*子元素*的属性为准
 
     - ```html
-        <div color="white">
+        <div color="blue">
             <p color="red">I'm Red</p>
         </div>
         ```
 
     - 上例中，`color` 属性以 p 元素的为准
 
-我们给出一个尽可能全的例子，方便大家理解与实现：
+我们给出一个尽可能全的例子，方便大家理解与实现（测试点不存在 white，但例子里忘改了，将就看吧）：
 
 ```html
 <div color="white">
@@ -618,6 +620,8 @@ void render(Element *element, int row, int col);
 
 也许[C enum(枚举)](https://www.runoob.com/cprogramming/c-enum.html)可以帮你方便地表示元素类型、属性。使用枚举能极大地减少代码量与代码冗余。
 
+多用二维数组存信息，反正数据规模很小，空间很大。
+
 ## 测试数据
 
 ### 数据约定
@@ -638,6 +642,8 @@ void render(Element *element, int row, int col);
 
     - 除了开始标签和结束标签，其他地方不会出现 `<` 和 `>`。同理，只有属性值处会出现 `"`，属性值前会出现`=`。你可以以此类推，`/` 等字符也不会乱出现。
 
+    - 标签之外，可能出现一些空白符
+
 - 对于长度的约定
 
     - HTML 源代码长度不超过 $10^4$ 个字符
@@ -645,6 +651,7 @@ void render(Element *element, int row, int col);
     - 每个开始标签中声明的属性数不超过 $10$ 个
     - 元素的内容长度不小于 $1$ 个字符，不超过 $50$ 个字符，所以 p 和 h 元素不会撑爆一行（转义码是不计在内的）
     - 属性值的长度不超过 $500$。
+    - div 嵌套深度不超过 $10$ 层
 
 - 所有元素的高和宽不超过网页的高和宽。如果有父元素且父元素指定了高和宽，也不会超过。总之，你**不需要考虑**任何子元素把父元素撑爆的情况。
 
@@ -660,30 +667,74 @@ void render(Element *element, int row, int col);
 
 错误数据点在评测信息里会乱序输出，这是评测机并发评测数据点导致的，目前没有较好的解决方法。
 
+> P.S. 此题中，spj 对于某个数据点是否正确，是通过如下(c++)代码判断的：
+>
+> ```cpp
+> bool compareLine(string oufLine, string ansLine) {
+>     trimEnd(oufLine);
+>     trimEnd(ansLine);
+>     return oufLine == ansLine;
+> }
+> 
+> some code...
+> 
+> // Compare the output and the answer
+> string oufLine, ansLine;        // store a single line of your output and the answer
+> while(getline(ans, ansLine)) {  // get a line from the answer
+>     string temp = ansLine;
+>     trimEnd(temp);              // trim ending space of ansLine
+>     if (!getline(ouf, oufLine) && !temp.empty()) {
+>         invalid("Output is too short");
+>     }
+>     if (!compareLine(oufLine, ansLine)) {
+>         invalid("Wrong answer");
+>     }
+> }
+> 
+> while (getline(ouf, oufLine)) {
+>     if (!oufLine.empty()) {
+>         invalid("Output is too long");
+>     }
+> }
+> ```
+>
+> 据此，你可以知道如何有效地输出空格才算答案正确。同时，别忘了 oj 会自动丢掉你的输出最末尾的所有空白符。
+>
+> 可以不用看这一段代码，反正按下面**输出格式**中的要求输出准没错。
+
 ### 数据分布
 
-为如下分布：
+技科版(class 1~7)为如下分布：
 
-- phTest (4 cases, 20pts): 只包含 `p` 和 `h` 元素
-- phimgTest (8 cases, 40pts): 只包含 `p`, `h` 和 `img` 元素
-- divTest (4 cases, 20pts): 包含全部元素。保证 `div` 元素只含 `w` 和 `h` 属性
-- layoutTest (4 cases, 20pts): 包含全部元素与属性
+- phTest (4 cases, 20 pts): 只包含 `p` 和 `h` 元素
+- phimgTest (8 cases, 40 pts): 只包含 `p`, `h` 和 `img` 元素
+- divTest (4 cases, 20 pts): 包含全部元素。保证 `div` 元素只含 `w` 和 `h` 属性
+- layoutTest (4 cases, 20 pts): 包含全部元素与属性
+
+软院版(class 0)为如下分布：
+
+- phTest (2 cases, 10 pts)：只包含 `p` 和 `h` 元素
+- phimgTest (4 cases, 20 pts)：只包含 `p`, `h` 和 `img` 元素
+- divTest (4 cases, 20 pts)：包含除了 `style` 之外的全部元素。保证 `div` 元素只含 `w` 和 `h` 属性
+- layoutTest (4 cases, 20 pts)：包含除了 `style` 之外的全部元素。`div` 元素会包含布局属性
+- styleTest (4 cases, 10 pts)：只包含 `p`，`h` 和 `style` 元素
+- hardTest (2 cases, 10 pts)：包含全部元素与属性
 
 ## 输入格式
 
- 输入一个不知道多少行的魔改版 HTML 源代码。代码总长度小于 $10^4$。
+ 输入一个不知道多少行的魔改版 HTML 源代码。代码总长度小于 $10^4$。保证源码格式正确。
 
 ## 输出格式
 
 在 OJ（非终端） 中，输出一个 10 行，大于等于 50 列的原始结果，包含了转义码。
 
-在命令行终端中，输出一个 10 * 50 可见字符的网页渲染结果。
+在命令行终端中，输出相同内容，你应该得到一个 10 * 50 可见字符的网页渲染结果。
 
 ## 测试样例
 
-说明：输出必须是 10 * 50 的大小，空白用空格补全。
+说明：输出的可见字符（不包括转义码）必须是 10 * 50 的大小，空白用空格补全。
 
-仓库中 `cases` 目录下有样例的输入和输出源文件，你可以使用输入重定向来读入文件。
+仓库中 `cases` 目录下有样例的输入和输出源文件，你可以使用输入重定向（比如 freopen）来读入文件。然后使用 diff 工具（比如 CLion 自带的 "compare with clipboard" 或者 [Diffchecker](https://www.diffchecker.com/zh-Hans/)）
 
 输出转义符以输出源文件中的为准。
 
@@ -852,3 +903,7 @@ void render(Element *element, int row, int col);
 ```
 
 ![image-20241214193327432](images/image-20241214193327432.png)
+
+**剩余样例请在仓库 `cases` 目录下查阅！**
+
+Good luck :)

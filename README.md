@@ -252,7 +252,6 @@ Man, what can I say
 
 ##### 样式(style)*
 
-> 软院班(class0)需要考虑这个元素
 
 style 标签能向某类元素指派（Assign）属性，或者提供自定义属性。
 
